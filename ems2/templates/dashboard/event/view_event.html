@@ -1,0 +1,163 @@
+<!-- @format -->
+{% extends 'dashboard/base.html' %}
+{% load static %} {% block content %}
+<!-- Main Content -->
+<div class="main-content">
+  <section class="section">
+    <div class="section-body">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-6">
+          <div class="card card-primary">
+            <div class="card-header pb-0">
+              <h4>Event Details</h4>
+            </div>
+            <div class="card-body">
+              <ul
+                class="list-unstyled user-details list-unstyled-border list-unstyled-noborder"
+              >
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Event Name</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ event.event_name}}</div>
+                    </div>
+                  </div>
+                </li>
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Venue</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ event.venue }}</div>
+                    </div>
+                  </div>
+                </li>
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Date</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">
+                        {{ event.date }}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Time</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ event.time }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Duration</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ event.duration }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">End Of Time</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ event.end_time }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Registration Deadline</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ event.reg_end_time }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Registration Fees</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ event.reg_fee }}</div>
+                    </div>
+                  </div>
+                </li>
+
+
+                <li class="media">
+                  <a
+                    href="{% url 'event:delete_event' pk=event.pk %}"
+                    class="ml-4 d-block btn btn-outline-danger btn-sm"
+                    >Delete Event</a
+                  >
+                  <a href="{% url 'event:update_event' pk=event.pk %}"
+                  class="ml-4 d-block btn btn-outline-primary btn-sm"
+                  >Edit Event</a
+                >
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h4>Banners<code></code></h4>
+            </div>
+            <div class="card-body">
+              <div class="gallery gallery-fw" data-item-height="100">
+                {% for item in banners %}
+                  <div class="gallery-item" data-image="{{item.web_image.url}}" data-title="Image 1" href="{{item.web_image.url}}" title="{{item.title}}" style="height: 100px; background-image: url(&quot;{{item.web_image.url}}&quot;);"></div>
+                {% endfor %}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %} {% load static %}{% block scripts %} {{formset.media}}
+
+<script src="{% static 'dashboard/js/jquery.formset.min.js' %}"></script>
+<!-- <script src="{% static 'dashboard/bundles/editable-table/mindmup-editabletable.js' %}"></script> -->
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".form_set_row").formset({
+      prefix: "{{formset.prefix}}",
+      formCssClass: "dynamic-formset1",
+      addText: "Add-row",
+      addCssClass: "btn btn-primary btn-sm ml-2",
+      deleteCssClass: "delete-row",
+      deleteText: "<i class='fas fa-trash-alt text-danger'></i>",
+    });
+  });
+  //   $(function () {
+  //     $("#mainTable").editableTableWidget();
+  //   });
+</script>
+
+{% endblock %}

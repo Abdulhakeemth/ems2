@@ -1,0 +1,151 @@
+<!-- @format -->
+{% extends 'dashboard/base.html' %}
+{% load static %} {% block content %}
+<!-- Main Content -->
+<div class="main-content">
+  <section class="section">
+    <div class="section-body">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-6">
+          <div class="card card-primary">
+            <div class="card-header pb-0">
+              <h4>EventTicket Details</h4>
+            </div>
+            <div class="card-body">
+              <ul
+                class="list-unstyled user-details list-unstyled-border list-unstyled-noborder"
+              >
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">EventTicket </div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ eventticket.event}}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Full Name</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ eventticket.full_name }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Email</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ eventticket.email }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Phone</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ eventticket.phone }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Address</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ eventticket.address }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">District</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ eventticket.district }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Payment Status</div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ eventticket.payment_status }}</div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="media">
+                  <div class="media-body">
+                    <div class="media-title">Attandance </div>
+                  </div>
+                  <div class="media-items">
+                    <div class="media-item">
+                      <div class="media-value">{{ eventticket.attandance  }}</div>
+                    </div>
+                  </div>
+                </li>
+
+
+                <li class="media">
+                  <a
+                    href="{% url 'event:delete_eventticket' pk=eventticket.pk %}"
+                    class="ml-4 d-block btn btn-outline-danger btn-sm"
+                    >Delete EventTicket</a
+                  >
+                  <a 
+                    href="{% url 'event:update_eventticket' pk=eventticket.pk %}"
+                    class="ml-4 d-block btn btn-outline-primary btn-sm"
+                    >Edit EventTicket</a
+                  >
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-6">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %} {% load static %}{% block scripts %} {{formset.media}}
+
+<script src="{% static 'dashboard/js/jquery.formset.min.js' %}"></script>
+<!-- <script src="{% static 'dashboard/bundles/editable-table/mindmup-editabletable.js' %}"></script> -->
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".form_set_row").formset({
+      prefix: "{{formset.prefix}}",
+      formCssClass: "dynamic-formset1",
+      addText: "Add-row",
+      addCssClass: "btn btn-primary btn-sm ml-2",
+      deleteCssClass: "delete-row",
+      deleteText: "<i class='fas fa-trash-alt text-danger'></i>",
+    });
+  });
+  //   $(function () {
+  //     $("#mainTable").editableTableWidget();
+  //   });
+</script>
+
+{% endblock %}
